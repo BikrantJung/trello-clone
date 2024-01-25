@@ -14,15 +14,15 @@ export const DashboardNavbar = () => {
         {/* TODO: Mobile Dashboard Sidebar */}
 
         {/*  */}
-        <div className="mx-auto flex w-full items-center justify-between gap-x-4 md:max-w-screen-2xl">
+        <div className="mx-auto flex w-full items-center justify-between md:max-w-screen-2xl">
           <div className="hidden md:flex">
             <Logo />
           </div>
-          <Button size="sm" className="h-auto rounded-sm px-2 py-1.5">
-            <span className="hidden md:block">Create</span>
-            <span className="md:hidden">
-              <Icons.plus className="icon-sm" />
-            </span>
+          <Button
+            size="sm"
+            className="mr-8 h-auto rounded-sm px-1.5 py-1 text-xs md:px-2 md:py-1.5 md:text-sm"
+          >
+            Create
           </Button>
         </div>
         <div className="ml-auto flex items-center gap-x-4">
