@@ -51,9 +51,7 @@ export const metadata: Metadata = {
     images: [siteConfig.ogImage],
     creator: "@_rdev7",
   },
-  icons: {
-    icon: "/favicon.ico",
-  },
+  icons: siteConfig.icons,
 }
 
 export const viewport: Viewport = {

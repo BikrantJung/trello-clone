@@ -4,7 +4,6 @@ import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
 import { Icons } from "@/components/icons"
-import { ModeToggle } from "@/components/mode-toggle"
 
 export default function Home() {
   return (
@@ -23,9 +22,8 @@ export default function Home() {
             target="_blank"
             className={cn(buttonVariants({ size: "default" }))}
           >
-            Get Started
+            Get Taskify for free
           </Link>
-          <ModeToggle />
         </div>
       </div>
     </main>
