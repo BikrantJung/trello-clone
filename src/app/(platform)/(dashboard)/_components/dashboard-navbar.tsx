@@ -14,7 +14,7 @@ export const DashboardNavbar = () => {
         {/* TODO: Mobile Dashboard Sidebar */}
 
         {/*  */}
-        <div className="flex items-center gap-x-4">
+        <div className="mx-auto flex w-full items-center justify-between gap-x-4 md:max-w-screen-2xl">
           <div className="hidden md:flex">
             <Logo />
           </div>
