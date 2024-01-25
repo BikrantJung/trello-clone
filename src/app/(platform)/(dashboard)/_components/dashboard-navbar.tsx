@@ -1,10 +1,11 @@
-import { OrganizationSwitcher } from "@clerk/nextjs"
+import { OrganizationSwitcher, UserButton } from "@clerk/nextjs"
 
 import { Button } from "@/components/ui/button"
 import { Icons } from "@/components/icons"
 import { Logo } from "@/components/logo"
 import { ModeToggle } from "@/components/mode-toggle"
 import { organizationSwitcherAppearance } from "@/styles/organization-switcher-appearance"
+import { userButtonAppearance } from "@/styles/user-button-appearance"
 
 export const DashboardNavbar = () => {
   return (
@@ -24,7 +25,7 @@ export const DashboardNavbar = () => {
             </span>
           </Button>
         </div>
-        <div className="ml-auto flex items-center gap-x-2">
+        <div className="ml-auto flex items-center gap-x-4">
           <ModeToggle />
           <OrganizationSwitcher
             hidePersonal
@@ -32,6 +33,7 @@ export const DashboardNavbar = () => {
             afterCreateOrganizationUrl="/organization/:id"
             appearance={organizationSwitcherAppearance}
           />
+          <UserButton afterSignOutUrl="/" appearance={userButtonAppearance} />
         </div>
       </nav>
       {/* A div with height equals to nav to push other components downwards. */}
