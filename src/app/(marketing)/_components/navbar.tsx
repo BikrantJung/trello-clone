@@ -13,10 +13,10 @@ export const MarketingNavbar = () => {
         <div className="flex w-full items-center justify-center space-x-4 md:w-auto">
           <ModeToggle />
           <Button variant={"outline"} asChild size="sm">
-            <Link href="/login">Login</Link>
+            <Link href="/sign-in">Login</Link>
           </Button>
           <Button size="sm" asChild>
-            <Link href="/register">Get Taskify for free</Link>
+            <Link href="/sign-up">Get Taskify for free</Link>
           </Button>
         </div>
       </div>
