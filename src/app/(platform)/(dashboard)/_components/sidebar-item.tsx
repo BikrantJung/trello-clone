@@ -1,13 +1,17 @@
 "use client"
 
 import Image from "next/image"
+import { usePathname, useRouter } from "next/navigation"
 
 import { cn } from "@/lib/utils"
 import {
   Accordion,
+  AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
+import { Button } from "@/components/ui/button"
+import { Icons } from "@/components/icons"
 
 export type Organization = {
   id: string
@@ -28,6 +32,36 @@ export const SidebarItem = ({
   onExpand,
   organization,
 }: SidebarItemProps) => {
+  const routes = [
+    {
+      label: "Boards",
+      icon: <Icons.layout className="icon-sm mr-2" />,
+      href: `/organization/${organization.id}`,
+    },
+    {
+      label: "Activity",
+      icon: <Icons.activity className="icon-sm mr-2" />,
+      href: `/organization/${organization.id}/activity`,
+    },
+    {
+      label: "Settings",
+      icon: <Icons.settings className="icon-sm mr-2" />,
+      href: `/organization/${organization.id}/settings`,
+    },
+    {
+      label: "Billing",
+      icon: <Icons.creditCard className="icon-sm mr-2" />,
+      href: `/organization/${organization.id}/billing`,
+    },
+  ]
+
+  const router = useRouter()
+  const pathname = usePathname()
+
+  const onClick = (href: string) => {
+    router.push(href)
+  }
+
   return (
     <AccordionItem value={organization.id} className="border-none">
       <AccordionTrigger
@@ -49,6 +83,24 @@ export const SidebarItem = ({
           <span className="text-sm font-medium">{organization.name}</span>
         </div>
       </AccordionTrigger>
+      <AccordionContent className="pt-1 text-muted-foreground">
+        {routes.map((route) => {
+          return (
+            <Button
+              key={route.href}
+              onClick={() => onClick(route.href)}
+              className={cn(
+                "mb-1 w-full justify-start pl-10 font-normal ",
+                pathname === route.href && "bg-accent/10 text-accent"
+              )}
+              variant={"ghost"}
+            >
+              {route.icon}
+              {route.label}
+            </Button>
+          )
+        })}
+      </AccordionContent>
     </AccordionItem>
   )
 }

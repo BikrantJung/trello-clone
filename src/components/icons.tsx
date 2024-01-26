@@ -1,4 +1,13 @@
-import { Command, Moon, Plus, SunMedium } from "lucide-react"
+import {
+  Activity,
+  Command,
+  CreditCard,
+  Layout,
+  Moon,
+  Plus,
+  Settings,
+  SunMedium,
+} from "lucide-react"
 
 export type IconKeys = keyof typeof icons
 
@@ -11,6 +20,10 @@ const icons = {
   sun: SunMedium,
   moon: Moon,
   plus: Plus,
+  activity: Activity,
+  creditCard: CreditCard,
+  settings: Settings,
+  layout: Layout,
 }
 
 export const Icons: IconsType = icons
