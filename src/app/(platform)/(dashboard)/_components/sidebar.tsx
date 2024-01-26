@@ -6,8 +6,6 @@ import { useLocalStorage } from "usehooks-ts"
 
 import { Accordion } from "@/components/ui/accordion"
 import { Button } from "@/components/ui/button"
-import { Separator } from "@/components/ui/separator"
-import { Skeleton } from "@/components/ui/skeleton"
 import { Icons } from "@/components/icons"
 
 import { Organization, SidebarItem } from "./sidebar-item"
