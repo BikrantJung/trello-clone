@@ -6,6 +6,7 @@ import { useLocalStorage } from "usehooks-ts"
 
 import { Accordion } from "@/components/ui/accordion"
 import { Button } from "@/components/ui/button"
+import { Skeleton } from "@/components/ui/skeleton"
 import { Icons } from "@/components/icons"
 
 import { Organization, SidebarItem } from "./sidebar-item"
@@ -48,7 +49,19 @@ export const DashboardSidebar = ({
   }
 
   if (!isOrgLoaded || !isOrgListLoaded || userMemberships.isLoading) {
-    return <div>Loading...</div>
+    return (
+      <>
+        <div className="mb-2 flex items-center justify-between">
+          <Skeleton className="h-10 w-[60%]" />
+          <Skeleton className="h-10 w-10" />
+        </div>
+        <div className="space-y-2">
+          <SidebarItem.Skeleton />
+          <SidebarItem.Skeleton />
+          <SidebarItem.Skeleton />
+        </div>
+      </>
+    )
   }
 
   return (
