@@ -3,6 +3,7 @@ import {
   Command,
   CreditCard,
   Layout,
+  Menu,
   Moon,
   Plus,
   Settings,
@@ -24,6 +25,7 @@ const icons = {
   creditCard: CreditCard,
   settings: Settings,
   layout: Layout,
+  menu: Menu,
 }
 
 export const Icons: IconsType = icons
