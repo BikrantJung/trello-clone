@@ -7,12 +7,14 @@ import { ModeToggle } from "@/components/mode-toggle"
 import { organizationSwitcherAppearance } from "@/styles/organization-switcher-appearance"
 import { userButtonAppearance } from "@/styles/user-button-appearance"
 
+import MobileSidebar from "./mobile-sidebar"
+
 export const DashboardNavbar = () => {
   return (
     <>
       <nav className="fixed top-0 z-50 flex h-14 w-full items-center border-b bg-background px-4 shadow-sm">
         {/* TODO: Mobile Dashboard Sidebar */}
-
+        <MobileSidebar />
         {/*  */}
         <div className="mx-auto flex w-full items-center justify-between md:max-w-screen-2xl">
           <div className="hidden md:flex">
