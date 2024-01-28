@@ -8,6 +8,7 @@ import {
   Plus,
   Settings,
   SunMedium,
+  Trash,
 } from "lucide-react"
 
 export type IconKeys = keyof typeof icons
@@ -26,6 +27,7 @@ const icons = {
   settings: Settings,
   layout: Layout,
   menu: Menu,
+  trash: Trash,
 }
 
 export const Icons: IconsType = icons

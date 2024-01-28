@@ -1,5 +1,6 @@
 "use server"
 
+import { revalidatePath } from "next/cache"
 import { z } from "zod"
 
 import { db } from "@/lib/db"
@@ -17,4 +18,6 @@ export async function createBoard(formData: FormData) {
       title,
     },
   })
+  //   TODO: Make org_id dynamic
+  revalidatePath("/organization/org_2bSKbVfkRzaiJVN5TO2UngRRPH0")
 }
