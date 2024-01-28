@@ -10,7 +10,7 @@
     "format": "pnpm prettier ./src --write",
     "format:check": "pnpm prettier ./src --check",
     "ui:add": "pnpm dlx shadcn-ui@latest add",
-    "db:generate":"pnpm dlx prisma db generate",
+    "db:generate":"pnpm dlx prisma generate",
     "db:push":"pnpm dlx prisma db push"
   },
   "dependencies": {

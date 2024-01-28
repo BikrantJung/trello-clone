@@ -8,9 +8,10 @@ generator client {
 datasource db {
   provider  = "postgresql"
   url       = env("DATABASE_URL")
-  directUrl = env("DIRECT_DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 model Board {
-  id String @unique @default(uuid())
+  id    String @unique @default(uuid())
+  title String
 }
