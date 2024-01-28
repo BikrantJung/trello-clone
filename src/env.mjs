@@ -21,5 +21,7 @@ export const env = createEnv({
       process.env.NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL,
     NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL:
       process.env.NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL,
+    DIRECT_DATABSE_URL: process.env.DIRECT_DATABSE_URL,
+    DATABSE_URL: process.env.DATABSE_URL,
   },
 })
