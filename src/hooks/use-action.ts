@@ -27,7 +27,8 @@ export const useAction = <TInput, TOutput>(
   const execute = useCallback(
     async (input: TInput) => {
       setIsLoading(true)
-      console.log("Running execute callback...")
+      setFieldErrors(undefined)
+      setErrors(undefined)
       try {
         const result = await action(input)
         console.log(result, "Received result")
@@ -45,6 +46,8 @@ export const useAction = <TInput, TOutput>(
         if (data) {
           setData(data)
           // Callback to onSuccess function
+          setFieldErrors(undefined)
+          setErrors(undefined)
           options.onSuccess?.(data)
         }
         if (statusCode) setStatusCode(statusCode)
