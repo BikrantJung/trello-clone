@@ -1,7 +1,6 @@
 "use server"
 
 import { revalidatePath } from "next/cache"
-import { redirect } from "next/navigation"
 import { auth } from "@clerk/nextjs"
 
 import { createSafeAction } from "@/lib/create-safe-action"
