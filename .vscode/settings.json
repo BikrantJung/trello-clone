@@ -1,4 +1,13 @@
 {
   "editor.formatOnSave": true,
-  "editor.defaultFormatter": "esbenp.prettier-vscode"
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.accessibilitySupport": "off",
+  "extensions.ignoreRecommendations": true,
+  "typescript.surveys.enabled": false,
+  "typescript.disableAutomaticTypeAcquisition": true,
+  "telemetry.telemetryLevel": "crash",
+  "update.enableWindowsBackgroundUpdates": false,
+  "update.mode": "none",
+  "workbench.enableExperiments": false,
+  "workbench.settings.enableNaturalLanguageSearch": false
 }
