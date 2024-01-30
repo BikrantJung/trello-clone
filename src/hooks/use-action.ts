@@ -19,7 +19,7 @@ export const useAction = <TInput, TOutput>(
   const [fieldErrors, setFieldErrors] = useState<
     FieldErrors<TInput> | undefined
   >(undefined)
-  const [errors, setErrors] = useState<string | undefined>(undefined)
+  const [error, setErrors] = useState<string | undefined>(undefined)
   const [data, setData] = useState<TOutput | undefined>(undefined)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [statusCode, setStatusCode] = useState<number | undefined>(undefined)
@@ -27,8 +27,10 @@ export const useAction = <TInput, TOutput>(
   const execute = useCallback(
     async (input: TInput) => {
       setIsLoading(true)
+      console.log("Running execute callback...")
       try {
         const result = await action(input)
+        console.log(result, "Received result")
         if (!result) {
           return
         }
@@ -48,7 +50,9 @@ export const useAction = <TInput, TOutput>(
         if (statusCode) setStatusCode(statusCode)
       } catch (error) {
         //
+        console.log(error)
       } finally {
+        console.log("FInally Block")
         setIsLoading(false)
         options.onComplete?.()
       }
@@ -57,10 +61,11 @@ export const useAction = <TInput, TOutput>(
   )
 
   return {
-    errors,
+    error,
     data,
     statusCode,
     isLoading,
+    fieldErrors,
     execute,
   }
 }
