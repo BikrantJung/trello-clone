@@ -9,6 +9,7 @@ import {
   Settings,
   SunMedium,
   Trash,
+  XCircle,
 } from "lucide-react"
 
 export type IconKeys = keyof typeof icons
@@ -28,6 +29,7 @@ const icons = {
   layout: Layout,
   menu: Menu,
   trash: Trash,
+  xCircle: XCircle,
 }
 
 export const Icons: IconsType = icons

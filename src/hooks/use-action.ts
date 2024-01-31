@@ -31,7 +31,6 @@ export const useAction = <TInput, TOutput>(
       setErrors(undefined)
       try {
         const result = await action(input)
-        console.log(result, "Received result")
         if (!result) {
           return
         }
@@ -55,7 +54,6 @@ export const useAction = <TInput, TOutput>(
         //
         console.log(error)
       } finally {
-        console.log("FInally Block")
         setIsLoading(false)
         options.onComplete?.()
       }
