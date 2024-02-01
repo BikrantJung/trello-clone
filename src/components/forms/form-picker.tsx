@@ -48,9 +48,15 @@ export const FormPicker = ({ id, errors }: FormPickerProps) => {
 
   if (isLoading) {
     return (
-      <div className="flex h-full min-h-44 w-full items-center justify-center p-6">
-        <Icons.loader className="icon-sm animate-spin text-accent" />
-      </div>
+      <>
+        <div className="flex h-full min-h-44 w-full items-center justify-center p-6">
+          <Icons.loader className="icon-sm animate-spin text-accent" />
+        </div>
+        <FormPicker.Refetch
+          isLoading={isLoading}
+          onClick={() => fetchImages()}
+        />
+      </>
     )
   }
   return (
@@ -92,17 +98,29 @@ export const FormPicker = ({ id, errors }: FormPickerProps) => {
           </div>
         ))}
       </div>
-      <Button
-        disabled={isLoading}
-        onClick={() => fetchImages()}
-        className="h-7 w-full py-0 text-xs"
-        variant="outline"
-      >
-        <Icons.refreshCcw
-          className={cn("icon-sm mr-2", isLoading && "animate-spin")}
-        />
-        Refetch
-      </Button>
+      <FormPicker.Refetch isLoading={isLoading} onClick={() => fetchImages()} />
     </div>
+  )
+}
+interface FormPickerRefetchProps {
+  isLoading: boolean
+  onClick: () => void
+}
+FormPicker.Refetch = function FormPickerRefetch({
+  isLoading,
+  onClick,
+}: FormPickerRefetchProps) {
+  return (
+    <Button
+      disabled={isLoading}
+      onClick={onClick}
+      className="h-7 w-full py-0 text-xs"
+      variant="outline"
+    >
+      <Icons.refreshCcw
+        className={cn("icon-sm mr-2", isLoading && "animate-spin")}
+      />
+      Refetch
+    </Button>
   )
 }
