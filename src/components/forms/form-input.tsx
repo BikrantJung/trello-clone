@@ -22,6 +22,8 @@ interface FormInputProps {
   defaultValue?: string
   errors?: Record<string, string[] | undefined>
   onBlur?: () => void
+  value: string
+  onChange: (value: string) => void
 }
 export const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
   (
@@ -37,15 +39,14 @@ export const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
       placeholder,
       required,
       errors,
+      value,
+      onChange,
       ...props
     },
     ref
   ) => {
     const { pending } = useFormStatus()
-    const { setTitle, title } = useBoardTitle((state) => state)
-    useEffect(() => {
-      setTitle(title ? title : defaultValue)
-    }, [defaultValue, setTitle, title])
+
     return (
       <div className="space-y-2">
         <div className="space-y-1">
@@ -66,8 +67,8 @@ export const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
             aria-labelledby={label}
             id={id}
             onBlur={onBlur}
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            value={value}
+            onChange={(e) => onChange(e.target.value)}
             placeholder={placeholder}
             ref={ref}
             required={required}

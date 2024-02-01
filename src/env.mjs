@@ -9,6 +9,8 @@ export const env = createEnv({
     NEXT_PUBLIC_CLERK_SIGN_UP_URL: z.string().min(1),
     NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL: z.string().min(1),
     NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL: z.string().min(1),
+    NEXT_PUBLIC_UNSPLASH_ACCESS_KEY: z.string().min(1),
+    NEXT_PUBLIC_UNSPLASH_SECRET_KEY: z.string().min(1),
   },
   runtimeEnv: {
     NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
@@ -23,5 +25,9 @@ export const env = createEnv({
       process.env.NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL,
     DIRECT_DATABSE_URL: process.env.DIRECT_DATABSE_URL,
     DATABSE_URL: process.env.DATABSE_URL,
+    NEXT_PUBLIC_UNSPLASH_ACCESS_KEY:
+      process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY,
+    NEXT_PUBLIC_UNSPLASH_SECRET_KEY:
+      process.env.NEXT_PUBLIC_UNSPLASH_SECRET_KEY,
   },
 })

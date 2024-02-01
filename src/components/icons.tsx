@@ -4,9 +4,11 @@ import {
   CreditCard,
   HelpCircle,
   Layout,
+  Loader2,
   Menu,
   Moon,
   Plus,
+  RefreshCcw,
   Settings,
   SunMedium,
   Trash,
@@ -38,6 +40,8 @@ const icons = {
   user: User2,
   helpCircle: HelpCircle,
   x: X,
+  loader: Loader2,
+  refreshCcw: RefreshCcw,
 }
 
 export const Icons: IconsType = icons
