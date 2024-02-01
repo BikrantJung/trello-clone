@@ -14,6 +14,7 @@ import { useBoardForm } from "@/hooks/use-board-form"
 
 import { Icons } from "../icons"
 import { Button } from "../ui/button"
+import { FormErrors } from "./form-errors"
 
 interface FormPickerProps {
   id: string
@@ -69,16 +70,24 @@ export const FormPicker = ({ id, errors }: FormPickerProps) => {
               "group relative aspect-video cursor-pointer bg-muted transition hover:opacity-75",
               pending &&
                 "pointer-events-none cursor-not-allowed opacity-50 hover:opacity-50",
-              image.id === state.imageId &&
+              image.id === state.image?.id &&
                 "rounded-sm outline outline-offset-1 outline-accent"
             )}
             onClick={() => {
               if (pending) return
-              if (image.id === state.imageId) {
+              if (image.id === state.image?.id) {
                 // Unselect image
-                actions.setField({ imageId: "" })
+                actions.setField({ image: undefined })
               } else {
-                actions.setField({ imageId: image.id })
+                actions.setField({
+                  image: {
+                    id: image.id,
+                    fullUrl: image.urls.full,
+                    htmlLink: image.links.html,
+                    thumbUrl: image.urls.thumb,
+                    userName: image.user.name,
+                  },
+                })
               }
             }}
           >
@@ -91,13 +100,14 @@ export const FormPicker = ({ id, errors }: FormPickerProps) => {
             <Link
               href={image.links.html}
               target="_blank"
-              className="absolute bottom-0 w-full truncate bg-black/10 p-1 text-[10px] text-white opacity-0 hover:underline group-hover:opacity-100"
+              className="absolute bottom-0 w-full truncate bg-black/50 p-1 text-[10px] text-white opacity-0 hover:underline group-hover:opacity-100"
             >
-              {image.user.name}
+              <code>{image.user.name}</code>
             </Link>
           </div>
         ))}
       </div>
+      <FormErrors id={id} errors={errors} />
       <FormPicker.Refetch isLoading={isLoading} onClick={() => fetchImages()} />
     </div>
   )

@@ -14,7 +14,7 @@ import { FormSubmit } from "./form-submit"
 
 export const CreateBoardForm = () => {
   const { resetFieldErrors } = useFieldErrors()
-  const { actions, state } = useBoardForm((state) => state)
+  const { actions, state: createFormData } = useBoardForm((state) => state)
   const { execute, fieldErrors, setFieldErrors } = useAction(createBoard, {
     onSuccess() {
       toast.success("Board created!")
@@ -35,7 +35,7 @@ export const CreateBoardForm = () => {
       <div className="space-y-4">
         <FormPicker id="image" errors={fieldErrors} />
         <FormInput
-          value={state.title}
+          value={createFormData.title}
           onChange={(value) => actions.setField({ title: value })}
           id="title"
           label="Board title"
