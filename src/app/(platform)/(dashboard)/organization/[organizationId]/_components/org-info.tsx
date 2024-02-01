@@ -6,8 +6,6 @@ import { useOrganization } from "@clerk/nextjs"
 import { Skeleton } from "@/components/ui/skeleton"
 import { Icons } from "@/components/icons"
 
-interface OrgInfoProps {}
-
 export const OrgInfo = () => {
   const { organization, isLoaded } = useOrganization()
   if (!isLoaded) {

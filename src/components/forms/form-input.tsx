@@ -1,6 +1,6 @@
 "use client"
 
-import { forwardRef, useState } from "react"
+import { forwardRef, useEffect, useState } from "react"
 import { useFormStatus } from "react-dom"
 
 import { cn } from "@/lib/utils"
@@ -43,6 +43,9 @@ export const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
   ) => {
     const { pending } = useFormStatus()
     const { setTitle, title } = useBoardTitle((state) => state)
+    useEffect(() => {
+      setTitle(title ? title : defaultValue)
+    }, [defaultValue, setTitle, title])
     return (
       <div className="space-y-2">
         <div className="space-y-1">
@@ -63,7 +66,6 @@ export const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
             aria-labelledby={label}
             id={id}
             onBlur={onBlur}
-            defaultValue={defaultValue}
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             placeholder={placeholder}

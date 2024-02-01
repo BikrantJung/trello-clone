@@ -1,9 +1,6 @@
 "use client"
 
-import { createBoard } from "@/actions/create-board/index"
-import { toast } from "sonner"
-
-import { useAction } from "@/hooks/use-action"
+import { useFieldErrors } from "@/hooks/use-field-errors"
 import { Button } from "@/components/ui/button"
 import {
   Popover,
@@ -28,8 +25,13 @@ export const FormPopover = ({
   sideOffset = 0,
   formComponent,
 }: FormPopoverProps) => {
+  const { setResetFieldErrors } = useFieldErrors((state) => state)
   return (
-    <Popover>
+    <Popover
+      onOpenChange={(state) => {
+        setResetFieldErrors(state)
+      }}
+    >
       <PopoverTrigger asChild>{children}</PopoverTrigger>
       <PopoverContent
         align={align}
