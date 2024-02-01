@@ -17,7 +17,7 @@ export const NewBoardPopover = () => {
     >
       <div
         role="button"
-        className="relative flex aspect-video h-full w-full flex-col items-center justify-center gap-y-1 rounded-sm border border-accent  bg-accent/10 transition "
+        className="relative flex aspect-video h-full w-full flex-col items-center justify-center gap-y-1 rounded-sm border border-border bg-accent/10 hover:border-accent "
       >
         <Button size="sm">Create new board</Button>
         <span className="text-xs">5 remaining</span>

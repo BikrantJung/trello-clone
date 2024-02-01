@@ -68,7 +68,7 @@ export const BoardImagePicker = ({ id, errors }: BoardImagePickerProps) => {
           <div
             key={image.id}
             className={cn(
-              "group relative aspect-video cursor-pointer bg-muted transition hover:opacity-75",
+              "group relative aspect-video cursor-pointer bg-muted transition hover:opacity-75 ",
               pending &&
                 "pointer-events-none cursor-not-allowed opacity-50 hover:opacity-50",
               image.id === state.image?.id &&
@@ -101,7 +101,7 @@ export const BoardImagePicker = ({ id, errors }: BoardImagePickerProps) => {
             <Link
               href={image.links.html}
               target="_blank"
-              className="absolute bottom-0 w-full truncate bg-black/50 p-1 text-[10px] text-white opacity-0 hover:underline group-hover:opacity-100"
+              className="invisible absolute bottom-0 w-full truncate bg-black/50 p-1 text-[10px] text-white hover:underline group-hover:visible"
             >
               <code>{image.user.name}</code>
             </Link>

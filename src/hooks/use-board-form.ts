@@ -15,7 +15,7 @@ type ImageType = {
 type Actions = {
   setField: (obj: Partial<State>) => void
 }
-const initialValue: State = {
+export const initialBoardFormValues: State = {
   title: "",
   image: {
     fullUrl: "",
@@ -30,7 +30,7 @@ type StateActions = {
   actions: Actions
 }
 export const useBoardForm = create<StateActions>((set) => ({
-  state: initialValue,
+  state: initialBoardFormValues,
   actions: {
     setField: (newState) =>
       set((prevState) => ({
