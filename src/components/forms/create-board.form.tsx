@@ -1,25 +1,37 @@
 "use client"
 
 import { createBoard } from "@/actions/create-board/index"
+import { toast } from "sonner"
 
 import { useAction } from "@/hooks/use-action"
 
-import { FormErrors } from "./form-errors"
 import { FormInput } from "./form-input"
+import { FormSubmit } from "./form-submit"
 
 export const CreateBoardForm = () => {
-  const { execute, fieldErrors } = useAction(createBoard)
+  const { execute, fieldErrors, setFieldErrors } = useAction(createBoard, {
+    onSuccess() {
+      toast.success("Board created!")
+    },
+    onError(error) {
+      toast.error(error)
+    },
+  })
   const onSubmit = (formData: FormData) => {
     const title = formData.get("title") as string
-    console.log(title)
     execute({ title })
   }
   return (
-    <form action={onSubmit}>
-      <div className="flex flex-col space-y-2">
-        <FormInput id="title" type="text" />
-        <FormErrors id="title" errors={fieldErrors} />
+    <form action={onSubmit} className="space-y-4">
+      <div className="space-y-4">
+        <FormInput
+          id="title"
+          label="Board title"
+          type="text"
+          errors={fieldErrors}
+        />
       </div>
+      <FormSubmit className="w-full">Create</FormSubmit>
     </form>
   )
 }

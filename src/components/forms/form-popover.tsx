@@ -1,6 +1,7 @@
 "use client"
 
 import { createBoard } from "@/actions/create-board/index"
+import { toast } from "sonner"
 
 import { useAction } from "@/hooks/use-action"
 import { Button } from "@/components/ui/button"
@@ -12,15 +13,12 @@ import {
 } from "@/components/ui/popover"
 import { Icons } from "@/components/icons"
 
-import { FormErrors } from "./form-errors"
-import { FormInput } from "./form-input"
-import { FormSubmit } from "./form-submit"
-
 interface FormPopoverProps {
   children: React.ReactNode
   side?: "left" | "right" | "bottom" | "top"
   align?: "start" | "center" | "end"
   sideOffset?: number
+  formComponent: React.ReactNode
 }
 
 export const FormPopover = ({
@@ -28,21 +26,10 @@ export const FormPopover = ({
   align,
   side = "bottom",
   sideOffset = 0,
+  formComponent,
 }: FormPopoverProps) => {
-  const { execute, fieldErrors, setFieldErrors } = useAction(createBoard, {
-    onSuccess(data) {
-      console.log({ data })
-    },
-    onError(error) {
-      console.log({ error })
-    },
-  })
-  const onSubmit = (formData: FormData) => {
-    const title = formData.get("title") as string
-    execute({ title })
-  }
   return (
-    <Popover onOpenChange={() => setFieldErrors(undefined)}>
+    <Popover>
       <PopoverTrigger asChild>{children}</PopoverTrigger>
       <PopoverContent
         align={align}
@@ -61,17 +48,7 @@ export const FormPopover = ({
             <Icons.x className="icon-sm" />
           </Button>
         </PopoverClose>
-        <form action={onSubmit} className="space-y-4">
-          <div className="space-y-4">
-            <FormInput
-              id="title"
-              label="Board title"
-              type="text"
-              errors={fieldErrors}
-            />
-          </div>
-          <FormSubmit className="w-full">Create</FormSubmit>
-        </form>
+        {formComponent}
       </PopoverContent>
     </Popover>
   )
