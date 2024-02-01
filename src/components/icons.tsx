@@ -11,6 +11,7 @@ import {
   SunMedium,
   Trash,
   User2,
+  X,
   XCircle,
 } from "lucide-react"
 
@@ -36,6 +37,7 @@ const icons = {
   xCircle: XCircle,
   user: User2,
   helpCircle: HelpCircle,
+  x: X,
 }
 
 export const Icons: IconsType = icons

@@ -8,7 +8,6 @@ interface FormErrorsProps {
   className?: string
 }
 export const FormErrors = ({ errors, id, className }: FormErrorsProps) => {
-  if (!errors) return
   return (
     <div
       id={`${id}-error`}
