@@ -7,6 +7,7 @@ import { toast } from "sonner"
 import { useAction } from "@/hooks/use-action"
 import { useBoardForm } from "@/hooks/use-board-form"
 import { useFieldErrors } from "@/hooks/use-field-errors"
+import { useFormPopover } from "@/hooks/use-form-popover"
 
 import { FormInput } from "../forms/form-input"
 import { FormSubmit } from "../forms/form-submit"
@@ -15,9 +16,11 @@ import { BoardImagePicker } from "./board-image-picker"
 export const CreateBoardForm = () => {
   const { resetFieldErrors } = useFieldErrors()
   const { actions, state: createFormData } = useBoardForm((state) => state)
+  const { setIsOpen } = useFormPopover()
   const { execute, fieldErrors, setFieldErrors } = useAction(createBoard, {
     onSuccess() {
       toast.success("Board created!")
+      setIsOpen(false)
     },
     onError(error) {
       toast.error(error)

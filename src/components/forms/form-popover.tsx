@@ -1,6 +1,7 @@
 "use client"
 
 import { useFieldErrors } from "@/hooks/use-field-errors"
+import { useFormPopover } from "@/hooks/use-form-popover"
 import { Button } from "@/components/ui/button"
 import {
   Popover,
@@ -26,10 +27,13 @@ export const FormPopover = ({
   formComponent,
 }: FormPopoverProps) => {
   const { setResetFieldErrors } = useFieldErrors((state) => state)
+  const { isOpen, setIsOpen } = useFormPopover()
   return (
     <Popover
+      open={isOpen}
       onOpenChange={(state) => {
         setResetFieldErrors(state)
+        setIsOpen(state)
       }}
     >
       <PopoverTrigger asChild>{children}</PopoverTrigger>

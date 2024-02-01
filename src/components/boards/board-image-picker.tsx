@@ -53,6 +53,7 @@ export const BoardImagePicker = ({ id, errors }: BoardImagePickerProps) => {
           <Icons.loader className="icon-sm animate-spin text-accent" />
         </div>
         <BoardImagePicker.Refetch
+          pending={pending}
           isLoading={isLoading}
           onClick={() => fetchImages()}
         />
@@ -109,6 +110,7 @@ export const BoardImagePicker = ({ id, errors }: BoardImagePickerProps) => {
       </div>
       <FormErrors id={id} errors={errors} className="mb-1" />
       <BoardImagePicker.Refetch
+        pending={pending}
         isLoading={isLoading}
         onClick={() => fetchImages()}
       />
@@ -117,16 +119,18 @@ export const BoardImagePicker = ({ id, errors }: BoardImagePickerProps) => {
 }
 interface BoardImagePickerRefetchProps {
   isLoading: boolean
+  pending: boolean
   onClick: () => void
 }
 BoardImagePicker.Refetch = function BoardImagePickerRefetch({
   isLoading,
+  pending,
   onClick,
 }: BoardImagePickerRefetchProps) {
   return (
     <Button
       type="button"
-      disabled={isLoading}
+      disabled={isLoading || pending}
       onClick={onClick}
       className="h-7 w-full py-0 text-xs"
       variant="outline"
