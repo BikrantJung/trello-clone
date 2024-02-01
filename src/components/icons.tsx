@@ -2,6 +2,7 @@ import {
   Activity,
   Command,
   CreditCard,
+  HelpCircle,
   Layout,
   Menu,
   Moon,
@@ -9,13 +10,16 @@ import {
   Settings,
   SunMedium,
   Trash,
+  User2,
   XCircle,
 } from "lucide-react"
 
 export type IconKeys = keyof typeof icons
 
+// This ensures auto-completion for props.
+type IconProps<T extends React.ElementType> = React.ComponentProps<T>
 type IconsType = {
-  [key in IconKeys]: React.ElementType
+  [key in IconKeys]: React.ComponentType<IconProps<(typeof icons)[key]>>
 }
 
 const icons = {
@@ -30,6 +34,8 @@ const icons = {
   menu: Menu,
   trash: Trash,
   xCircle: XCircle,
+  user: User2,
+  helpCircle: HelpCircle,
 }
 
 export const Icons: IconsType = icons
