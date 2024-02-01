@@ -1,6 +1,6 @@
 import { Icons } from "@/components/icons"
 
-import { NewBoardPopover } from "./new-board"
+import { NewBoardCard } from "./new-board"
 
 export const BoardList = () => {
   return (
@@ -10,7 +10,7 @@ export const BoardList = () => {
         Your Boards
       </div>
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-        <NewBoardPopover />
+        <NewBoardCard />
       </div>
       {/* <Board /> */}
     </div>

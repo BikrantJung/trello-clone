@@ -4,7 +4,6 @@ import { forwardRef, useEffect, useState } from "react"
 import { useFormStatus } from "react-dom"
 
 import { cn } from "@/lib/utils"
-import { useBoardTitle } from "@/hooks/use-board-title"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 

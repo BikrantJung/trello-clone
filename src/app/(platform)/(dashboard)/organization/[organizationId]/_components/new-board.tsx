@@ -8,7 +8,7 @@ import { Hint } from "@/components/boards/hint"
 import { FormPopover } from "@/components/forms/form-popover"
 import { Icons } from "@/components/icons"
 
-export const NewBoardPopover = () => {
+export const NewBoardCard = () => {
   return (
     <FormPopover
       sideOffset={10}

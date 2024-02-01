@@ -60,7 +60,6 @@ export const BoardImagePicker = ({ id, errors }: BoardImagePickerProps) => {
       </>
     )
   }
-  console.log(state)
   return (
     <div className="relative">
       <div className="mb-2 mt-3 grid grid-cols-3 gap-2">

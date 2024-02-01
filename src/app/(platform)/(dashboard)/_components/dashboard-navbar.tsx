@@ -1,12 +1,11 @@
 import { OrganizationSwitcher, UserButton } from "@clerk/nextjs"
 
-import { Button } from "@/components/ui/button"
-import { Icons } from "@/components/icons"
 import { Logo } from "@/components/logo"
 import { ModeToggle } from "@/components/mode-toggle"
 import { organizationSwitcherAppearance } from "@/styles/organization-switcher-appearance"
 import { userButtonAppearance } from "@/styles/user-button-appearance"
 
+import { CreateBoardButton } from "./create-board.button"
 import MobileSidebar from "./mobile-sidebar"
 
 export const DashboardNavbar = () => {
@@ -20,12 +19,7 @@ export const DashboardNavbar = () => {
           <div className="hidden md:flex">
             <Logo />
           </div>
-          <Button
-            size="sm"
-            className="mr-8 h-auto rounded-sm px-1.5 py-1 text-xs md:px-2 md:py-1.5 md:text-sm"
-          >
-            Create
-          </Button>
+          <CreateBoardButton />
         </div>
         <div className="ml-auto flex items-center gap-x-4">
           <ModeToggle />

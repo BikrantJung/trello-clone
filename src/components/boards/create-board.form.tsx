@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect } from "react"
+import { useRouter } from "next/navigation"
 import { createBoard } from "@/actions/create-board/index"
 import { toast } from "sonner"
 
@@ -17,12 +18,14 @@ export const CreateBoardForm = () => {
   const { resetFieldErrors } = useFieldErrors()
   const { actions, state: createFormData } = useBoardForm((state) => state)
   const { setIsOpen } = useFormPopover()
+  const router = useRouter()
   const { execute, fieldErrors, setFieldErrors } = useAction(createBoard, {
-    onSuccess() {
+    onSuccess(data) {
       toast.success("Board created!")
       // Reset board form data
       actions.setField(initialBoardFormValues)
       setIsOpen(false)
+      router.push(`board/${data.id}`)
     },
     onError(error) {
       toast.error(error)
