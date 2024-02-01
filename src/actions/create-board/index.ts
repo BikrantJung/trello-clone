@@ -10,8 +10,8 @@ import { CreateBoardSchema } from "./schema"
 import { InputType, ReturnType } from "./types"
 
 const handler = async (data: InputType): Promise<ReturnType> => {
-  const { userId } = auth()
-  if (!userId) {
+  const { userId, orgId } = auth()
+  if (!userId || !orgId) {
     return {
       error: "Unauthorized",
       statusCode: 401,
@@ -21,7 +21,13 @@ const handler = async (data: InputType): Promise<ReturnType> => {
   //   'data' is already validated here, because we will wrap this handler inside createSafeAction
   let board
   try {
-    board = await db.board.create({ data })
+    board = await db.board.create({
+      data: {
+        title: data.title,
+        orgId,
+        ...data.image,
+      },
+    })
   } catch (error) {
     return {
       error: "Failed to create.",

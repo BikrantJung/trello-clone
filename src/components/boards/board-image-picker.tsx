@@ -1,26 +1,25 @@
 "use client"
 
-import { useCallback, useEffect, useState } from "react"
+import { useCallback, useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { defaultImages, UnsplashImageType } from "@/constants/images"
 import { useFormStatus } from "react-dom"
-import { Random } from "unsplash-js/dist/methods/photos/types"
 import { useLocalStorage } from "usehooks-ts"
 
 import { unsplash } from "@/lib/unsplash"
 import { cn } from "@/lib/utils"
 import { useBoardForm } from "@/hooks/use-board-form"
 
+import { FormErrors } from "../forms/form-errors"
 import { Icons } from "../icons"
 import { Button } from "../ui/button"
-import { FormErrors } from "./form-errors"
 
-interface FormPickerProps {
+interface BoardImagePickerProps {
   id: string
   errors?: Record<string, string[] | undefined>
 }
-export const FormPicker = ({ id, errors }: FormPickerProps) => {
+export const BoardImagePicker = ({ id, errors }: BoardImagePickerProps) => {
   const { actions, state } = useBoardForm((state) => state)
   const { pending } = useFormStatus()
   const [isLoading, setIsLoading] = useState(false)
@@ -53,13 +52,14 @@ export const FormPicker = ({ id, errors }: FormPickerProps) => {
         <div className="flex h-full min-h-44 w-full items-center justify-center p-6">
           <Icons.loader className="icon-sm animate-spin text-accent" />
         </div>
-        <FormPicker.Refetch
+        <BoardImagePicker.Refetch
           isLoading={isLoading}
           onClick={() => fetchImages()}
         />
       </>
     )
   }
+  console.log(state)
   return (
     <div className="relative">
       <div className="mb-2 mt-3 grid grid-cols-3 gap-2">
@@ -107,21 +107,25 @@ export const FormPicker = ({ id, errors }: FormPickerProps) => {
           </div>
         ))}
       </div>
-      <FormErrors id={id} errors={errors} />
-      <FormPicker.Refetch isLoading={isLoading} onClick={() => fetchImages()} />
+      <FormErrors id={id} errors={errors} className="mb-1" />
+      <BoardImagePicker.Refetch
+        isLoading={isLoading}
+        onClick={() => fetchImages()}
+      />
     </div>
   )
 }
-interface FormPickerRefetchProps {
+interface BoardImagePickerRefetchProps {
   isLoading: boolean
   onClick: () => void
 }
-FormPicker.Refetch = function FormPickerRefetch({
+BoardImagePicker.Refetch = function BoardImagePickerRefetch({
   isLoading,
   onClick,
-}: FormPickerRefetchProps) {
+}: BoardImagePickerRefetchProps) {
   return (
     <Button
+      type="button"
       disabled={isLoading}
       onClick={onClick}
       className="h-7 w-full py-0 text-xs"

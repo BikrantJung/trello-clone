@@ -1,8 +1,3 @@
-import Link from "next/link"
-
-import { Hint } from "@/components/boards/hint"
-import { CreateBoardForm } from "@/components/forms/create-board.form"
-import { FormPopover } from "@/components/forms/form-popover"
 import { Icons } from "@/components/icons"
 
 import { NewBoardPopover } from "./new-board"

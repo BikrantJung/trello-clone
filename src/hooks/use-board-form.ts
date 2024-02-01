@@ -2,7 +2,7 @@ import { create } from "zustand"
 
 type State = {
   title: string
-  image: Partial<ImageType> | undefined
+  image: Partial<ImageType>
 }
 // This data is saved to database for actual cover image of the board.
 type ImageType = {
@@ -17,7 +17,13 @@ type Actions = {
 }
 const initialValue: State = {
   title: "",
-  image: undefined,
+  image: {
+    fullUrl: "",
+    htmlLink: "",
+    id: "",
+    thumbUrl: "",
+    userName: "",
+  },
 }
 type StateActions = {
   state: State

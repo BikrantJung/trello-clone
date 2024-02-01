@@ -8,9 +8,9 @@ import { useAction } from "@/hooks/use-action"
 import { useBoardForm } from "@/hooks/use-board-form"
 import { useFieldErrors } from "@/hooks/use-field-errors"
 
-import { FormInput } from "./form-input"
-import { FormPicker } from "./form-picker"
-import { FormSubmit } from "./form-submit"
+import { FormInput } from "../forms/form-input"
+import { FormSubmit } from "../forms/form-submit"
+import { BoardImagePicker } from "./board-image-picker"
 
 export const CreateBoardForm = () => {
   const { resetFieldErrors } = useFieldErrors()
@@ -25,7 +25,17 @@ export const CreateBoardForm = () => {
   })
   const onSubmit = (formData: FormData) => {
     const title = formData.get("title") as string
-    execute({ title })
+    const { fullUrl, htmlLink, id, thumbUrl, userName } = createFormData.image
+    execute({
+      title,
+      image: {
+        imageFullUrl: fullUrl || "",
+        imageHtmlLink: htmlLink || "",
+        imageId: id || "",
+        imageThumbUrl: thumbUrl || "",
+        imageUsername: userName || "",
+      },
+    })
   }
   useEffect(() => {
     if (resetFieldErrors) setFieldErrors(undefined)
@@ -33,7 +43,7 @@ export const CreateBoardForm = () => {
   return (
     <form action={onSubmit} className="space-y-4">
       <div className="space-y-4">
-        <FormPicker id="image" errors={fieldErrors} />
+        <BoardImagePicker id="image" errors={fieldErrors} />
         <FormInput
           value={createFormData.title}
           onChange={(value) => actions.setField({ title: value })}

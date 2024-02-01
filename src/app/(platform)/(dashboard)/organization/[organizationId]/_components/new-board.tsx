@@ -3,8 +3,8 @@
 import Link from "next/link"
 
 import { Button } from "@/components/ui/button"
+import { CreateBoardForm } from "@/components/boards/create-board.form"
 import { Hint } from "@/components/boards/hint"
-import { CreateBoardForm } from "@/components/forms/create-board.form"
 import { FormPopover } from "@/components/forms/form-popover"
 import { Icons } from "@/components/icons"
 
