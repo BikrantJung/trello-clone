@@ -1,11 +1,11 @@
 import { OrganizationSwitcher, UserButton } from "@clerk/nextjs"
 
+import { CreateBoardButton } from "@/components/boards/create-board.button"
 import { Logo } from "@/components/logo"
 import { ModeToggle } from "@/components/mode-toggle"
 import { organizationSwitcherAppearance } from "@/styles/organization-switcher-appearance"
 import { userButtonAppearance } from "@/styles/user-button-appearance"
 
-import { CreateBoardButton } from "./create-board.button"
 import MobileSidebar from "./mobile-sidebar"
 
 export const DashboardNavbar = () => {
