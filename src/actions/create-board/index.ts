@@ -29,6 +29,8 @@ const handler = async (data: InputType): Promise<ReturnType> => {
       },
     })
   } catch (error) {
+    console.log(error)
+    console.log("CREATE BOARD ERROR==>", error)
     return {
       error: "Failed to create.",
       statusCode: 500,
