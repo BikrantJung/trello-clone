@@ -1,5 +1,6 @@
 "use client"
 
+import { copyList } from "@/actions/copy-list"
 import { deleteList } from "@/actions/delete-list"
 import { List } from "@prisma/client"
 import { toast } from "sonner"
@@ -25,9 +26,14 @@ interface ListOptionsProps {
 const menubarItemClassnames =
   "flex cursor-pointer items-center justify-between py-2"
 export const ListOptions = ({ list, onAddCard }: ListOptionsProps) => {
-  const { execute: executeDelete } = useAction(deleteList, {
+  const { execute: executeDeleteList } = useAction(deleteList, {
     onSuccess() {
       toast.success("List Deleted!")
+    },
+  })
+  const { execute: executeCopyList } = useAction(copyList, {
+    onSuccess() {
+      toast.success("List Duplicated!")
     },
   })
   return (
@@ -41,14 +47,19 @@ export const ListOptions = ({ list, onAddCard }: ListOptionsProps) => {
             Add new card
             <Icons.plus className="icon-sm" />
           </MenubarItem>
-          <MenubarItem className={menubarItemClassnames}>
+          <MenubarItem
+            className={menubarItemClassnames}
+            onClick={() =>
+              executeCopyList({ boardId: list.boardId, id: list.id })
+            }
+          >
             Duplicate list
             <Icons.copy className="icon-sm" />
           </MenubarItem>
           <MenubarItem
             className={menubarItemClassnames}
             onClick={() =>
-              executeDelete({ boardId: list.boardId, id: list.id })
+              executeDeleteList({ boardId: list.boardId, id: list.id })
             }
           >
             Delete list
