@@ -13,9 +13,9 @@ import {
 } from "@/hooks/use-board-form"
 import { useFieldErrors } from "@/hooks/use-field-errors"
 import { useFormPopover } from "@/hooks/use-form-popover"
+import { FormInput } from "@/components/forms/form-input"
+import { FormSubmit } from "@/components/forms/form-submit"
 
-import { FormInput } from "../forms/form-input"
-import { FormSubmit } from "../forms/form-submit"
 import { BoardImagePicker } from "./board-image-picker"
 
 export const CreateBoardForm = () => {

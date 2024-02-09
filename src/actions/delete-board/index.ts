@@ -1,13 +1,14 @@
 "use server"
 
 import { revalidatePath } from "next/cache"
+import { redirect } from "next/navigation"
 import { auth } from "@clerk/nextjs"
 import { Board } from "@prisma/client"
 
 import { createSafeAction } from "@/lib/create-safe-action"
 import { db } from "@/lib/db"
 
-import { UpdateBoardSchem } from "./schema"
+import { DeleteBoardSchema } from "./schema"
 import { InputType, ReturnType } from "./types"
 
 async function handler(data: InputType): Promise<ReturnType> {
@@ -17,18 +18,12 @@ async function handler(data: InputType): Promise<ReturnType> {
       error: "Unauthorized",
     }
   }
-  const { title, id, image, orgId: boardOrgId } = data
-  let board: Board
+  const { id } = data
   try {
-    board = await db.board.update({
+    await db.board.delete({
       where: {
         id,
         orgId,
-      },
-      data: {
-        title,
-        orgId: boardOrgId || orgId,
-        ...image,
       },
     })
   } catch (error) {
@@ -36,11 +31,8 @@ async function handler(data: InputType): Promise<ReturnType> {
       error: "Error updaing board! See console for error",
     }
   }
-  revalidatePath(`/board/${id}`)
-  return {
-    data: board,
-    statusCode: 201,
-  }
+  revalidatePath(`/organization/${orgId}`)
+  redirect(`/organization/${orgId}`)
 }
 
-export const updateBoard = createSafeAction(UpdateBoardSchem, handler)
+export const deleteBoard = createSafeAction(DeleteBoardSchema, handler)

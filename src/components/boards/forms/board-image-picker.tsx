@@ -10,10 +10,9 @@ import { useLocalStorage } from "usehooks-ts"
 import { unsplash } from "@/lib/unsplash"
 import { cn } from "@/lib/utils"
 import { ImageType } from "@/hooks/use-board-form"
-
-import { FormErrors } from "../forms/form-errors"
-import { Icons } from "../icons"
-import { Button } from "../ui/button"
+import { Button } from "@/components/ui/button"
+import { FormErrors } from "@/components/forms/form-errors"
+import { Icons } from "@/components/icons"
 
 interface BoardImagePickerProps {
   id: string

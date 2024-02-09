@@ -46,6 +46,7 @@ export const FormPopover = ({
   console.log(`🔥 form-popover.tsx:42 ~ isOpen ~`, isOpen, isPopoverOpen)
   return (
     <Popover
+      modal
       onOpenChange={(state) => {
         setIsOpen(state)
         setResetFieldErrors(state)

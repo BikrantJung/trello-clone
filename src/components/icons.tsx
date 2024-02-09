@@ -7,6 +7,8 @@ import {
   Loader2,
   Menu,
   Moon,
+  MoreHorizontal,
+  Pencil,
   Plus,
   RefreshCcw,
   Settings,
@@ -42,6 +44,8 @@ const icons = {
   x: X,
   loader: Loader2,
   refreshCcw: RefreshCcw,
+  pencil: Pencil,
+  moreHorizontal: MoreHorizontal,
 }
 
 export const Icons: IconsType = icons

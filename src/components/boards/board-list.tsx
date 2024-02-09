@@ -4,7 +4,8 @@ import { getBoards } from "@/actions/get-board"
 import { Skeleton } from "@/components/ui/skeleton"
 import { Icons } from "@/components/icons"
 
-import { NewBoardCard } from "./new-board"
+import { BoardSettingsMenu } from "./board-setting-menu"
+import { NewBoardCard } from "./forms/new-board"
 
 export const BoardList = async () => {
   const { data: boards } = await getBoards()

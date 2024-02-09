@@ -13,7 +13,7 @@ import {
 } from "@/hooks/use-board-form"
 import { useFieldErrors } from "@/hooks/use-field-errors"
 import { useFormPopover } from "@/hooks/use-form-popover"
-import { BoardImagePicker } from "@/components/boards/board-image-picker"
+import { BoardImagePicker } from "@/components/boards/forms/board-image-picker"
 import { FormInput } from "@/components/forms/form-input"
 import { FormSubmit } from "@/components/forms/form-submit"
 

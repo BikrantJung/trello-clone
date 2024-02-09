@@ -3,7 +3,7 @@
 import Link from "next/link"
 
 import { Button } from "@/components/ui/button"
-import { CreateBoardForm } from "@/components/boards/create-board.form"
+import { CreateBoardForm } from "@/components/boards/forms/create-board.form"
 import { Hint } from "@/components/boards/hint"
 import { FormPopover } from "@/components/forms/form-popover"
 import { Icons } from "@/components/icons"
@@ -11,6 +11,7 @@ import { Icons } from "@/components/icons"
 export const NewBoardCard = () => {
   return (
     <FormPopover
+      formPopoverTitle="Create Board"
       sideOffset={10}
       side={"right"}
       formComponent={<CreateBoardForm />}

@@ -1,8 +1,9 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { CreateBoardForm } from "@/components/boards/create-board.form"
 import { FormPopover } from "@/components/forms/form-popover"
+
+import { CreateBoardForm } from "./forms/create-board.form"
 
 export const CreateBoardButton = () => {
   console.log("Clicked")
