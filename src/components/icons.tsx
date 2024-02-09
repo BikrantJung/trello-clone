@@ -1,6 +1,7 @@
 import {
   Activity,
   Command,
+  Copy,
   CreditCard,
   HelpCircle,
   Layout,
@@ -46,6 +47,7 @@ const icons = {
   refreshCcw: RefreshCcw,
   pencil: Pencil,
   moreHorizontal: MoreHorizontal,
+  copy: Copy,
 }
 
 export const Icons: IconsType = icons

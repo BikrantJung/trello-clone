@@ -6,7 +6,7 @@ import { toast } from "sonner"
 import { useAction } from "@/hooks/use-action"
 
 import { FormInput } from "../forms/form-input"
-import { Icons } from "../icons"
+import { ListOptions } from "./list-options"
 
 interface ListHeaderProps {
   list: ListWithCards
@@ -75,7 +75,7 @@ export const ListHeader = ({ list }: ListHeaderProps) => {
       >
         {formTitle || list.title}
       </button>
-      <Icons.moreHorizontal />
+      <ListOptions list={list} onAddCard={() => {}} />
     </div>
   )
 }
