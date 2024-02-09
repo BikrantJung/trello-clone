@@ -5,7 +5,7 @@ type State = {
   image: Partial<ImageType>
 }
 // This data is saved to database for actual cover image of the board.
-type ImageType = {
+export type ImageType = {
   id: string
   thumbUrl: string
   fullUrl: string
@@ -30,6 +30,22 @@ type StateActions = {
   actions: Actions
 }
 export const useBoardForm = create<StateActions>((set) => ({
+  state: initialBoardFormValues,
+  actions: {
+    setField: (newState) =>
+      set((prevState) => ({
+        state: {
+          ...prevState.state,
+          image: {
+            ...prevState.state.image,
+            ...newState.image,
+          },
+          ...newState,
+        },
+      })),
+  },
+}))
+export const useUpdateBoardForm = create<StateActions>((set) => ({
   state: initialBoardFormValues,
   actions: {
     setField: (newState) =>

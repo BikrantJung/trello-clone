@@ -1,6 +1,6 @@
 "use client"
 
-import { ElementRef, useEffect, useRef } from "react"
+import { ElementRef, useEffect, useRef, useState } from "react"
 
 import { useFieldErrors } from "@/hooks/use-field-errors"
 import { useFormPopover } from "@/hooks/use-form-popover"
@@ -19,6 +19,7 @@ interface FormPopoverProps {
   align?: "start" | "center" | "end"
   sideOffset?: number
   formComponent: React.ReactNode
+  formPopoverTitle: string
 }
 
 export const FormPopover = ({
@@ -27,18 +28,31 @@ export const FormPopover = ({
   side = "bottom",
   sideOffset = 0,
   formComponent,
+  formPopoverTitle,
 }: FormPopoverProps) => {
   const { setResetFieldErrors } = useFieldErrors((state) => state)
   const { isOpen, setIsOpen } = useFormPopover()
+  const [isPopoverOpen, setIsPopoverOpen] = useState(false)
   const popoverCloseRef = useRef<ElementRef<"button">>(null)
+
   useEffect(() => {
-    if (!isOpen) popoverCloseRef.current?.click()
+    if (!isOpen && isPopoverOpen) {
+      console.log(`🔥 form-popover.tsx:40 ~ Closing the popover... ~`)
+      popoverCloseRef.current?.click()
+      // console.log(popoverCloseRef.current)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen, setIsOpen])
+  console.log(`🔥 form-popover.tsx:42 ~ isOpen ~`, isOpen, isPopoverOpen)
   return (
     <Popover
       onOpenChange={(state) => {
+        setIsOpen(state)
         setResetFieldErrors(state)
-        console.log("Open changed", state)
+        setIsPopoverOpen(state)
+        if (!isOpen && state) {
+          popoverCloseRef.current?.click()
+        }
       }}
     >
       <PopoverTrigger asChild>{children}</PopoverTrigger>
@@ -49,10 +63,15 @@ export const FormPopover = ({
         sideOffset={sideOffset}
       >
         <div className="text-center text-sm font-medium text-muted-foreground/90">
-          Create Board
+          {formPopoverTitle}
         </div>
+
         <PopoverClose ref={popoverCloseRef} asChild>
           <Button
+            onClick={() => {
+              console.log("BUTTON IS CLICKED")
+            }}
+            ref={popoverCloseRef}
             className="absolute right-2 top-2 h-auto w-auto p-2 text-muted-foreground"
             variant="ghost"
           >

@@ -6,7 +6,11 @@ import { createBoard } from "@/actions/create-board/index"
 import { toast } from "sonner"
 
 import { useAction } from "@/hooks/use-action"
-import { initialBoardFormValues, useBoardForm } from "@/hooks/use-board-form"
+import {
+  ImageType,
+  initialBoardFormValues,
+  useBoardForm,
+} from "@/hooks/use-board-form"
 import { useFieldErrors } from "@/hooks/use-field-errors"
 import { useFormPopover } from "@/hooks/use-form-popover"
 
@@ -25,7 +29,7 @@ export const CreateBoardForm = () => {
       // Reset board form data
       actions.setField(initialBoardFormValues)
       setIsOpen(false)
-      router.push(`board/${data.id}`)
+      router.push(`/board/${data.id}`)
     },
     onError(error) {
       toast.error(error)
@@ -33,25 +37,35 @@ export const CreateBoardForm = () => {
   })
   const onSubmit = (formData: FormData) => {
     const title = formData.get("title") as string
-    const { fullUrl, htmlLink, id, thumbUrl, userName } = createFormData.image
     execute({
       title,
       image: {
-        imageFullUrl: fullUrl || "",
-        imageHtmlLink: htmlLink || "",
-        imageId: id || "",
-        imageThumbUrl: thumbUrl || "",
-        imageUsername: userName || "",
+        imageFullUrl: createFormData.image.fullUrl || "",
+        imageHtmlLink: createFormData.image.htmlLink || "",
+        imageId: createFormData.image.id || "",
+        imageThumbUrl: createFormData.image.thumbUrl || "",
+        imageUsername: createFormData.image.userName || "",
       },
     })
   }
+
+  function handleImageSelection(image: ImageType) {
+    actions.setField({ image })
+  }
+
   useEffect(() => {
     if (resetFieldErrors) setFieldErrors(undefined)
   }, [resetFieldErrors, setFieldErrors])
   return (
     <form action={onSubmit} className="space-y-4">
       <div className="space-y-4">
-        <BoardImagePicker id="image" errors={fieldErrors} />
+        <BoardImagePicker
+          id="image"
+          errors={fieldErrors}
+          stateImage={createFormData.image}
+          resetImageSelection={() => actions.setField({ image: undefined })}
+          onImageSelection={handleImageSelection}
+        />
         <FormInput
           value={createFormData.title}
           onChange={(value) => actions.setField({ title: value })}

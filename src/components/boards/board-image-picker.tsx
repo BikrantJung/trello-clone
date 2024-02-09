@@ -9,7 +9,7 @@ import { useLocalStorage } from "usehooks-ts"
 
 import { unsplash } from "@/lib/unsplash"
 import { cn } from "@/lib/utils"
-import { useBoardForm } from "@/hooks/use-board-form"
+import { ImageType } from "@/hooks/use-board-form"
 
 import { FormErrors } from "../forms/form-errors"
 import { Icons } from "../icons"
@@ -18,9 +18,17 @@ import { Button } from "../ui/button"
 interface BoardImagePickerProps {
   id: string
   errors?: Record<string, string[] | undefined>
+  onImageSelection: (image: ImageType) => void
+  resetImageSelection: () => void
+  stateImage: Partial<ImageType>
 }
-export const BoardImagePicker = ({ id, errors }: BoardImagePickerProps) => {
-  const { actions, state } = useBoardForm((state) => state)
+export const BoardImagePicker = ({
+  id,
+  errors,
+  onImageSelection,
+  resetImageSelection,
+  stateImage,
+}: BoardImagePickerProps) => {
   const { pending } = useFormStatus()
   const [isLoading, setIsLoading] = useState(false)
   const [boardImages, setBoardImages] = useLocalStorage(
@@ -70,23 +78,21 @@ export const BoardImagePicker = ({ id, errors }: BoardImagePickerProps) => {
               "group relative aspect-video cursor-pointer bg-muted transition hover:opacity-75 ",
               pending &&
                 "pointer-events-none cursor-not-allowed opacity-50 hover:opacity-50",
-              image.id === state.image?.id &&
+              image.id === stateImage?.id &&
                 "rounded-sm outline outline-offset-1 outline-accent"
             )}
             onClick={() => {
               if (pending) return
-              if (image.id === state.image?.id) {
+              if (image.id === stateImage?.id) {
                 // Unselect image
-                actions.setField({ image: undefined })
+                resetImageSelection()
               } else {
-                actions.setField({
-                  image: {
-                    id: image.id,
-                    fullUrl: image.urls.full,
-                    htmlLink: image.links.html,
-                    thumbUrl: image.urls.thumb,
-                    userName: image.user.name,
-                  },
+                onImageSelection({
+                  id: image.id,
+                  fullUrl: image.urls.full,
+                  htmlLink: image.links.html,
+                  thumbUrl: image.urls.thumb,
+                  userName: image.user.name,
                 })
               }
             }}

@@ -11,6 +11,7 @@ export const CreateBoardButton = () => {
       sideOffset={10}
       side={"bottom"}
       formComponent={<CreateBoardForm />}
+      formPopoverTitle="Create Board"
     >
       <Button
         size="sm"
