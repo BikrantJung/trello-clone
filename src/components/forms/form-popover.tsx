@@ -37,13 +37,11 @@ export const FormPopover = ({
 
   useEffect(() => {
     if (!isOpen && isPopoverOpen) {
-      console.log(`🔥 form-popover.tsx:40 ~ Closing the popover... ~`)
       popoverCloseRef.current?.click()
       // console.log(popoverCloseRef.current)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen, setIsOpen])
-  console.log(`🔥 form-popover.tsx:42 ~ isOpen ~`, isOpen, isPopoverOpen)
   return (
     <Popover
       modal

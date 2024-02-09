@@ -11,8 +11,8 @@
     "format:check": "pnpm prettier ./src --check",
     "ui:add": "pnpm dlx shadcn-ui@latest add",
     "db:generate": "pnpm dlx prisma generate",
-    "db:push": "pnpm dlx prisma db push",
-    "db:reset": "pnpm dlx prisma migrate reset"
+    "db:push": "pnpm dlx prisma db push && pnpm db:generate",
+    "db:reset": "pnpm dlx prisma migrate reset && pnpm db:push"
   },
   "dependencies": {
     "@clerk/nextjs": "^4.29.5",
@@ -36,6 +36,7 @@
     "next-themes": "^0.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "sharp": "^0.33.2",
     "sonner": "^1.4.0",
     "tailwind-merge": "^2.2.0",
     "tailwindcss-animate": "^1.0.7",

@@ -50,9 +50,10 @@ export const useAction = <TInput, TOutput>(
           options.onSuccess?.(data)
         }
         if (statusCode) setStatusCode(statusCode)
-      } catch (error) {
+      } catch (e) {
         //
-        console.log(error)
+        options.onError?.(error || "Something went wrong")
+        console.log(e)
       } finally {
         setIsLoading(false)
         options.onComplete?.()

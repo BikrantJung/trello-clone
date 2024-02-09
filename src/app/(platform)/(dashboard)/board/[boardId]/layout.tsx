@@ -2,10 +2,9 @@ import { Metadata } from "next"
 import Image from "next/image"
 import { redirect } from "next/navigation"
 import { auth } from "@clerk/nextjs"
-import { orderBy, startCase } from "lodash"
+import { startCase } from "lodash"
 
 import { db } from "@/lib/db"
-import { Skeleton } from "@/components/ui/skeleton"
 
 import { BoardNavbar } from "../_components/board-navbar"
 
@@ -50,7 +49,6 @@ const BoardIdLayout = async ({
     },
   })
 
-  console.log(board)
   if (!board) {
     redirect(`/organiation/${orgId}`)
   }

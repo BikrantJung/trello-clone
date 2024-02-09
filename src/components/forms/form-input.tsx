@@ -21,8 +21,8 @@ interface FormInputProps {
   defaultValue?: string
   errors?: Record<string, string[] | undefined>
   onBlur?: () => void
-  value: string
-  onChange: (value: string) => void
+  value?: string
+  onChange?: (value: string) => void
 }
 export const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
   (
@@ -67,13 +67,13 @@ export const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
             id={id}
             onBlur={onBlur}
             value={value}
-            onChange={(e) => onChange(e.target.value)}
+            onChange={(e) => onChange?.(e.target.value)}
             placeholder={placeholder}
             ref={ref}
             required={required}
             name={id}
             type={type}
-            disabled={pending || disabled}
+            disabled={disabled}
             className={cn(
               "h-7 px-2 py-1 text-sm",
               hasError && "border-destructive focus-visible:ring-0",
