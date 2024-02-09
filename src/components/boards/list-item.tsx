@@ -21,11 +21,13 @@ export const ListItem = ({ index, list }: ListItemProps) => {
       textAreaRef.current?.focus()
     })
   }
-  useOnClickOutside(textAreaRef, disableEditing)
   return (
     <div className="h-full w-[272px] shrink-0 select-none">
       <div className="w-full rounded-md bg-background pb-2 shadow-md">
         <ListHeader list={list} onAddCard={enableEditing} />
+        {list.cards.map((card) => (
+          <div key={card.id}>{card.title}</div>
+        ))}
         <CardForm
           ref={textAreaRef}
           isEditing={isEditing}
