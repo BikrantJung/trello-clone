@@ -5,7 +5,6 @@ import { updateCardPosition } from "@/actions/update-card-position"
 import { updateListPosition } from "@/actions/update-list-position"
 import { ListWithCards } from "@/prisma/types"
 import { DragDropContext, Droppable, DropResult } from "@hello-pangea/dnd"
-import { List } from "@prisma/client"
 import { toast } from "sonner"
 
 import { useAction } from "@/hooks/use-action"
