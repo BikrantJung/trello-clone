@@ -15,15 +15,16 @@ interface CardModalHeaderProps {
 }
 export const CardModalHeader = ({ cardData }: CardModalHeaderProps) => {
   const [cardTitle, setCardTitle] = useState<string>(cardData.title)
-  const [description, setDescription] = useState<string | null>(
-    cardData.description
-  )
-  const { execute } = useAction(updateCard, {
+
+  const { execute, isLoading } = useAction(updateCard, {
     onSuccess: (data) => {
-      toast.success("Card updated!")
       queryClient.invalidateQueries({
         queryKey: ["card", cardData.id],
       })
+      queryClient.invalidateQueries({
+        queryKey: ["card-logs", cardData.id],
+      })
+      toast.success("Card updated!")
       setCardTitle(data.title)
     },
     onError: (err) => {
@@ -42,7 +43,12 @@ export const CardModalHeader = ({ cardData }: CardModalHeaderProps) => {
   function handleSubmit() {
     const boardId = params.boardId as string
     if (cardData.title !== cardTitle) {
-      execute({ boardId, title: cardTitle, id: cardData.id, description })
+      execute({
+        boardId,
+        title: cardTitle,
+        id: cardData.id,
+        description: cardData.description,
+      })
       // TODO: Update database
     }
   }
@@ -52,13 +58,14 @@ export const CardModalHeader = ({ cardData }: CardModalHeaderProps) => {
       <div className="w-full">
         <form action={handleSubmit}>
           <FormInput
+            disabled={isLoading}
             id="title"
             ref={inputRef}
             onBlur={onBlur}
             value={cardTitle}
             onChange={(text) => setCardTitle(text)}
             type="text"
-            className="relative -left-1.5 mb-0.5 w-[95%] truncate border-transparent bg-transparent px-1 text-xl font-semibold  focus-visible:border-input focus-visible:bg-white"
+            className="relative -left-1.5 mb-0.5 w-[95%] truncate border-transparent bg-transparent px-1 text-xl font-semibold focus-visible:border-input  focus-visible:bg-white"
           />
         </form>
         <p className="text-sm text-muted-foreground">

@@ -30,6 +30,9 @@ export const CardDescription = ({ cardData }: CardDescriptionProps) => {
       queryClient.invalidateQueries({
         queryKey: ["card", cardData.id],
       })
+      queryClient.invalidateQueries({
+        queryKey: ["card-logs", cardData.id],
+      })
       setDescription(data.description)
     },
     onError(error) {
