@@ -59,7 +59,7 @@ export const CardActions = ({ cardData, onAddCard }: CardActionsProps) => {
       >
         <FormSubmit
           variant={"ghost"}
-          className="h-7 w-full justify-start text-sm font-normal"
+          className="h-7 w-full justify-start text-sm font-normal hover:bg-accent hover:text-accent-foreground"
         >
           <Icons.copy className="icon-sm mr-1" />
           <span>Duplicate card</span>
@@ -74,8 +74,8 @@ export const CardActions = ({ cardData, onAddCard }: CardActionsProps) => {
         }
       >
         <FormSubmit
-          variant={"ghost"}
-          className="h-7 w-full justify-start text-sm font-normal"
+          variant="ghost"
+          className="h-7 w-full justify-start text-sm font-normal hover:bg-destructive hover:text-destructive-foreground"
         >
           <Icons.trash className="icon-sm mr-1" />
           <span> Delete card</span>

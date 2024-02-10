@@ -22,7 +22,10 @@ export const CardItem = ({ index, card }: CardItemProps) => {
           onClick={() => onOpen(card.id)}
           className="truncate rounded-md border-2 border-transparent bg-background px-3 py-2 text-sm shadow-sm hover:border-foreground dark:bg-muted"
         >
-          {card.title}
+          <p>{card.title}</p>
+          <span className="truncate text-xs text-muted-foreground">
+            {card.description}
+          </span>
         </div>
       )}
     </Draggable>
