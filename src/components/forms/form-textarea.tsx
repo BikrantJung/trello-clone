@@ -15,10 +15,12 @@ interface FormTextareaProps {
   placeholder?: string
   required?: boolean
   disabled?: boolean
+  value?: string
   errors?: Record<string, string[] | undefined>
   className?: string
   onBlur?: () => void
   onClick?: () => void
+  onChange?: (text: string) => void
   onKeyDown?: KeyboardEventHandler<HTMLTextAreaElement> | undefined
   defaultValue?: string
 }
@@ -31,6 +33,7 @@ export const FormTextarea = React.forwardRef<
       className,
       id,
       defaultValue,
+      value,
       disabled,
       errors,
       label,
@@ -39,6 +42,8 @@ export const FormTextarea = React.forwardRef<
       onClick,
       onBlur,
       onKeyDown,
+      onChange,
+      ...props
     },
     ref
   ) => {
@@ -55,6 +60,8 @@ export const FormTextarea = React.forwardRef<
             </Label>
           ) : null}
           <Textarea
+            value={value}
+            onChange={(e) => onChange?.(e.target.value)}
             onBlur={onBlur}
             onClick={onClick}
             onKeyDown={onKeyDown}
@@ -70,6 +77,7 @@ export const FormTextarea = React.forwardRef<
             )}
             aria-describedby={`${id}-error`}
             defaultValue={defaultValue}
+            {...props}
           />
         </div>
         <FormErrors errors={errors} id={id} />
