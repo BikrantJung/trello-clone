@@ -4,9 +4,9 @@ import { VariantProps } from "class-variance-authority"
 import { useFormStatus } from "react-dom"
 
 import { cn } from "@/lib/utils"
-import { Button, buttonVariants } from "@/components/ui/button"
+import { Button, ButtonProps, buttonVariants } from "@/components/ui/button"
 
-interface FormSubmitProps {
+interface FormSubmitProps extends ButtonProps {
   children: React.ReactNode
   disabled?: boolean
   className?: string
@@ -18,9 +18,10 @@ export const FormSubmit = ({
   disabled,
   className,
   variant = "accent",
+  ...props
 }: FormSubmitProps) => {
   const { pending } = useFormStatus()
-
+  console.log(`🔥 form-submit.tsx:24 ~ pending ~`, pending)
   return (
     <Button
       disabled={pending || disabled}
@@ -28,6 +29,7 @@ export const FormSubmit = ({
       variant={variant}
       size="sm"
       className={cn(className)}
+      {...props}
     >
       {children}
     </Button>

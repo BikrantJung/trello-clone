@@ -43,7 +43,7 @@ export const ListOptions = ({ list, onAddCard }: ListOptionsProps) => {
           <Icons.moreHorizontal className="h-4 w-4  stroke-[2px]" />
         </MenubarTrigger>
         <MenubarContent>
-          <MenubarItem className={menubarItemClassnames}>
+          <MenubarItem className={menubarItemClassnames} onClick={onAddCard}>
             Add new card
             <Icons.plus className="icon-sm" />
           </MenubarItem>

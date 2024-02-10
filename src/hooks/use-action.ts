@@ -59,7 +59,7 @@ export const useAction = <TInput, TOutput>(
         options.onComplete?.()
       }
     },
-    [action, options]
+    [action, options, error]
   )
 
   return {
