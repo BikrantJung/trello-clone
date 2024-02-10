@@ -9,14 +9,14 @@ interface AuditLogCreateProps {
   entityTitle: string
   action: ACTION
 }
-export const auditLog = async (props: AuditLogCreateProps) => {
+export const createAuditLog = async (props: AuditLogCreateProps) => {
   try {
     const { orgId } = auth()
     const user = await currentUser()
     if (!user || !orgId) {
       throw new Error("Unauthenticated!")
     }
-    await db.auditLogs.create({
+    await db.auditLog.create({
       data: {
         orgId,
         userId: user.id,

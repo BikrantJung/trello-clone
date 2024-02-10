@@ -71,7 +71,7 @@ enum ENTITY_TYPE {
   CARD
 }
 
-model AuditLogs {
+model AuditLog {
   id          String @id @default(uuid())
   entityId    String
   entityTitle String

@@ -3,8 +3,9 @@
 import { revalidatePath } from "next/cache"
 import { CardWithList } from "@/prisma/types"
 import { auth } from "@clerk/nextjs"
-import { Board, Card } from "@prisma/client"
+import { Board, Card, ENTITY_TYPE } from "@prisma/client"
 
+import { createAuditLog } from "@/lib/create-audit-log"
 import { createSafeAction } from "@/lib/create-safe-action"
 import { db } from "@/lib/db"
 
@@ -34,6 +35,12 @@ async function handler(data: InputType): Promise<ReturnType> {
         title,
         description,
       },
+    })
+    await createAuditLog({
+      action: "UPDATE",
+      entityId: card.id,
+      entityTitle: card.title,
+      entityType: ENTITY_TYPE.CARD,
     })
   } catch (error) {
     return {
