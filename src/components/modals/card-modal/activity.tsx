@@ -3,6 +3,7 @@
 import { AuditLog } from "@prisma/client"
 
 import { Skeleton } from "@/components/ui/skeleton"
+import { ActivityItem } from "@/components/activity-item"
 import { Icons } from "@/components/icons"
 
 interface ActivityProps {
@@ -16,7 +17,7 @@ export const Activity = ({ auditLogsData }: ActivityProps) => {
         <p className="mb-2 font-semibold">Activity</p>
         <ol className="mt-2 space-y-4">
           {auditLogsData.map((data) => {
-            return <div key={data.id}>{data.entityTitle}</div>
+            return <ActivityItem key={data.id} log={data} />
           })}
         </ol>
       </div>
