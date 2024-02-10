@@ -128,7 +128,6 @@ export const ListContainer = ({ lists, boardId }: ListContainerProps) => {
         })
         setOrderedLists(newOrderedLists)
 
-        // TODO: Trigger server action to move one card to another list
         executeUpdateCardPosition({ boardId, items: destinationList.cards })
       }
     }
