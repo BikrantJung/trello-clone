@@ -1,10 +1,14 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { updateCardPosition } from "@/actions/update-card-position"
+import { updateListPosition } from "@/actions/update-list-position"
 import { ListWithCards } from "@/prisma/types"
 import { DragDropContext, Droppable, DropResult } from "@hello-pangea/dnd"
 import { List } from "@prisma/client"
+import { toast } from "sonner"
 
+import { useAction } from "@/hooks/use-action"
 import { ListForm } from "@/components/boards/forms/list-form"
 import { ListItem } from "@/components/boards/list-item"
 
@@ -22,7 +26,22 @@ function reorder<T>(list: T[], startIndex: number, endIndex: number) {
 
 export const ListContainer = ({ lists, boardId }: ListContainerProps) => {
   const [orderedLists, setOrderedLists] = useState(lists)
-
+  const { execute: executeUpdateListPosition } = useAction(updateListPosition, {
+    onSuccess: () => {
+      toast.success("List reordered!")
+    },
+    onError: (error) => {
+      toast.error(error)
+    },
+  })
+  const { execute: executeUpdateCardPosition } = useAction(updateCardPosition, {
+    onSuccess: () => {
+      toast.success("Card reordered!")
+    },
+    onError: (error) => {
+      toast.error(error)
+    },
+  })
   useEffect(() => {
     setOrderedLists(lists)
   }, [lists])
@@ -47,7 +66,7 @@ export const ListContainer = ({ lists, boardId }: ListContainerProps) => {
         (item, index) => ({ ...item, position: index })
       )
       setOrderedLists(items)
-      // TODO: Trigger server action and update on backend
+      executeUpdateListPosition({ items, boardId })
     }
 
     // If user moves a card
@@ -88,7 +107,7 @@ export const ListContainer = ({ lists, boardId }: ListContainerProps) => {
         sourceList.cards = reorderedCards
 
         setOrderedLists(newOrderedLists)
-        // TODO: Trigger server action to save to database
+        executeUpdateCardPosition({ boardId, items: reorderedCards })
       } else {
         // Moving the card to another list
         // Remove card from source list and add to destination list
@@ -110,6 +129,7 @@ export const ListContainer = ({ lists, boardId }: ListContainerProps) => {
         setOrderedLists(newOrderedLists)
 
         // TODO: Trigger server action to move one card to another list
+        executeUpdateCardPosition({ boardId, items: destinationList.cards })
       }
     }
   }
