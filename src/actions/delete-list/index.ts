@@ -1,9 +1,10 @@
 "use server"
 
 import { revalidatePath } from "next/cache"
-import { redirect } from "next/navigation"
 import { auth } from "@clerk/nextjs"
+import { ENTITY_TYPE } from "@prisma/client"
 
+import { createAuditLog } from "@/lib/create-audit-log"
 import { createSafeAction } from "@/lib/create-safe-action"
 import { db } from "@/lib/db"
 
@@ -25,6 +26,12 @@ async function handler(data: InputType): Promise<ReturnType> {
         id,
         boardId,
       },
+    })
+    await createAuditLog({
+      action: "DELETE",
+      entityId: list.id,
+      entityTitle: list.title,
+      entityType: ENTITY_TYPE.LIST,
     })
   } catch (error) {
     return {

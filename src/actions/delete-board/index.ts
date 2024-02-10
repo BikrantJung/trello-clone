@@ -3,8 +3,9 @@
 import { revalidatePath } from "next/cache"
 import { redirect } from "next/navigation"
 import { auth } from "@clerk/nextjs"
-import { Board } from "@prisma/client"
+import { ENTITY_TYPE } from "@prisma/client"
 
+import { createAuditLog } from "@/lib/create-audit-log"
 import { createSafeAction } from "@/lib/create-safe-action"
 import { db } from "@/lib/db"
 
@@ -20,11 +21,17 @@ async function handler(data: InputType): Promise<ReturnType> {
   }
   const { id } = data
   try {
-    await db.board.delete({
+    const board = await db.board.delete({
       where: {
         id,
         orgId,
       },
+    })
+    await createAuditLog({
+      action: "DELETE",
+      entityId: board.id,
+      entityTitle: board.title,
+      entityType: ENTITY_TYPE.BOARD,
     })
   } catch (error) {
     return {

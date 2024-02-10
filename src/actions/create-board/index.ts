@@ -2,7 +2,9 @@
 
 import { revalidatePath } from "next/cache"
 import { auth } from "@clerk/nextjs"
+import { ENTITY_TYPE } from "@prisma/client"
 
+import { createAuditLog } from "@/lib/create-audit-log"
 import { createSafeAction } from "@/lib/create-safe-action"
 import { db } from "@/lib/db"
 
@@ -36,7 +38,12 @@ const handler = async (data: InputType): Promise<ReturnType> => {
       statusCode: 500,
     }
   }
-
+  await createAuditLog({
+    action: "CREATE",
+    entityId: board.id,
+    entityTitle: board.title,
+    entityType: ENTITY_TYPE.BOARD,
+  })
   revalidatePath(`/board/${board.id}`)
   return { data: board }
 }
