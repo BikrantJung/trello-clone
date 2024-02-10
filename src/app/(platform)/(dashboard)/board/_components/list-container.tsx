@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { ListWithCards } from "@/prisma/types"
+import { DragDropContext, Droppable, DropResult } from "@hello-pangea/dnd"
 import { List } from "@prisma/client"
 
 import { ListForm } from "@/components/boards/forms/list-form"
@@ -11,21 +12,131 @@ interface ListContainerProps {
   lists: ListWithCards[]
   boardId: string
 }
+
+function reorder<T>(list: T[], startIndex: number, endIndex: number) {
+  const result = Array.from(list)
+  const [removed] = result.splice(startIndex, 1)
+  result.splice(endIndex, 0, removed)
+  return result
+}
+
 export const ListContainer = ({ lists, boardId }: ListContainerProps) => {
   const [orderedLists, setOrderedLists] = useState(lists)
 
   useEffect(() => {
-    console.log("Reference to lists changed.")
     setOrderedLists(lists)
   }, [lists])
 
+  const onDragEnd = (result: DropResult) => {
+    const { destination, source, type } = result
+
+    if (!destination) return
+
+    // If dropped in same position
+    if (
+      destination.droppableId === source.droppableId &&
+      destination.index == source.index
+    )
+      return
+
+    // If user is moving a list..
+    // This type is coming from <Droppable type="" />
+
+    if (type === "list") {
+      const items = reorder(orderedLists, source.index, destination.index).map(
+        (item, index) => ({ ...item, position: index })
+      )
+      setOrderedLists(items)
+      // TODO: Trigger server action and update on backend
+    }
+
+    // If user moves a card
+    if (type === "card") {
+      const newOrderedLists = [...orderedLists]
+
+      // Get source and destination list
+      const sourceList = newOrderedLists.find(
+        (list) => list.id === source.droppableId
+      )
+      const destinationList = newOrderedLists.find(
+        (list) => list.id === destination.droppableId
+      )
+      if (!sourceList || !destinationList) return
+
+      // Check if cards exists on source list or destination list
+      if (!sourceList.cards) {
+        sourceList.cards = []
+      }
+      if (!destinationList.cards) {
+        destinationList.cards = []
+      }
+
+      // Check if a card is moved within the same list or through different list
+
+      // Moving the card in same list
+      if (source.droppableId === destination.droppableId) {
+        const reorderedCards = reorder(
+          sourceList.cards,
+          source.index,
+          destination.index
+        )
+
+        reorderedCards.forEach((card, idx) => {
+          card.position = idx
+        })
+
+        sourceList.cards = reorderedCards
+
+        setOrderedLists(newOrderedLists)
+        // TODO: Trigger server action to save to database
+      } else {
+        // Moving the card to another list
+        // Remove card from source list and add to destination list
+        const [movedCard] = sourceList.cards.splice(source.index, 1)
+
+        movedCard.listId = destination.droppableId
+
+        // Add card to destination liset
+        destinationList.cards.splice(destination.index, 0, movedCard)
+
+        sourceList.cards.forEach((card, idx) => {
+          card.position = idx
+        })
+
+        // Update position for each cards in destination list
+        destinationList.cards.forEach((card, idx) => {
+          card.position = idx
+        })
+        setOrderedLists(newOrderedLists)
+
+        // TODO: Trigger server action to move one card to another list
+      }
+    }
+  }
+
   return (
-    <ol className="h-p flex gap-x-3">
-      {orderedLists.map((list, i) => (
-        <ListItem key={list.id} index={i} list={list} />
-      ))}
-      <ListForm />
-      <div className="w-1 flex-shrink-0"></div>
-    </ol>
+    <DragDropContext onDragEnd={onDragEnd}>
+      <Droppable
+        droppableId="lists"
+        key="lists"
+        type="list"
+        direction="horizontal"
+      >
+        {(provided) => (
+          <ol
+            {...provided.droppableProps}
+            ref={provided.innerRef}
+            className="h-p flex gap-x-3"
+          >
+            {orderedLists.map((list, i) => (
+              <ListItem key={list.id} index={i} list={list} />
+            ))}
+            {provided.placeholder}
+            <ListForm />
+            <div className="w-1 flex-shrink-0"></div>
+          </ol>
+        )}
+      </Droppable>
+    </DragDropContext>
   )
 }
