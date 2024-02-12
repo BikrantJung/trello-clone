@@ -7,6 +7,7 @@ import { ENTITY_TYPE } from "@prisma/client"
 import { createAuditLog } from "@/lib/create-audit-log"
 import { createSafeAction } from "@/lib/create-safe-action"
 import { db } from "@/lib/db"
+import { hasAvailableCount, incrementAvailableCount } from "@/lib/org-limit"
 
 import { CreateBoardSchema } from "./schema"
 import { InputType, ReturnType } from "./types"
@@ -19,7 +20,12 @@ const handler = async (data: InputType): Promise<ReturnType> => {
       statusCode: 401,
     }
   }
-
+  const canCreateBoard = await hasAvailableCount()
+  if (!canCreateBoard) {
+    return {
+      error: "Board count limit reached",
+    }
+  }
   //   'data' is already validated here, because we will wrap this handler inside createSafeAction
   let board
   try {
@@ -30,9 +36,8 @@ const handler = async (data: InputType): Promise<ReturnType> => {
         ...data.image,
       },
     })
+    await incrementAvailableCount()
   } catch (error) {
-    console.log(error)
-    console.log("CREATE BOARD ERROR==>", error)
     return {
       error: "Failed to create.",
       statusCode: 500,

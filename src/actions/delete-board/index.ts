@@ -8,6 +8,7 @@ import { ENTITY_TYPE } from "@prisma/client"
 import { createAuditLog } from "@/lib/create-audit-log"
 import { createSafeAction } from "@/lib/create-safe-action"
 import { db } from "@/lib/db"
+import { decreaseAvailableCount } from "@/lib/org-limit"
 
 import { DeleteBoardSchema } from "./schema"
 import { InputType, ReturnType } from "./types"
@@ -27,6 +28,7 @@ async function handler(data: InputType): Promise<ReturnType> {
         orgId,
       },
     })
+    await decreaseAvailableCount()
     await createAuditLog({
       action: "DELETE",
       entityId: board.id,
