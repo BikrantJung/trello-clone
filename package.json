@@ -12,7 +12,8 @@
     "ui:add": "pnpm dlx shadcn-ui@latest add",
     "db:generate": "pnpm dlx prisma generate",
     "db:push": "pnpm dlx prisma db push && pnpm db:generate",
-    "db:reset": "pnpm dlx prisma migrate reset && pnpm db:push"
+    "db:reset": "pnpm dlx prisma migrate reset && pnpm db:push",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@clerk/nextjs": "^4.29.5",
