@@ -8,7 +8,11 @@ import { Hint } from "@/components/boards/hint"
 import { FormPopover } from "@/components/forms/form-popover"
 import { Icons } from "@/components/icons"
 
-export const NewBoardCard = () => {
+export const NewBoardCard = ({
+  remainingBoards,
+}: {
+  remainingBoards: number
+}) => {
   return (
     <FormPopover
       formPopoverTitle="Create Board"
@@ -21,17 +25,12 @@ export const NewBoardCard = () => {
         className="relative flex aspect-video h-full w-full flex-col items-center justify-center gap-y-1 rounded-sm border border-border bg-accent/10 hover:border-accent "
       >
         <Button size="sm">Create new board</Button>
-        <span className="text-xs">5 remaining</span>
+        <span className="text-xs">{2 - remainingBoards} remaining</span>
         <div className="absolute bottom-2 right-2">
           <Hint
             content={
               <code className="">
-                Free workspaces can have up to 5 open boards.{" "}
-                {/* // TODO: Update href  */}
-                <Link href="/" className="text-accent underline">
-                  Updrage
-                </Link>{" "}
-                for unlimited boards.
+                You can only create 2 boards in this demo app.
               </code>
             }
             sideOffset={20}

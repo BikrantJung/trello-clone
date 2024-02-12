@@ -1,6 +1,9 @@
 import Link from "next/link"
+import { redirect } from "next/navigation"
 import { getBoards } from "@/actions/get-board"
+import { auth } from "@clerk/nextjs"
 
+import { db } from "@/lib/db"
 import { Skeleton } from "@/components/ui/skeleton"
 import { Icons } from "@/components/icons"
 
@@ -8,6 +11,13 @@ import { BoardSettingsMenu } from "./board-setting-menu"
 import { NewBoardCard } from "./forms/new-board"
 
 export const BoardList = async () => {
+  const { orgId } = auth()
+  if (!orgId) redirect("/select-org")
+  const orgLimit = await db.orgLimit.findUnique({
+    where: {
+      orgId,
+    },
+  })
   const { data: boards } = await getBoards()
   return (
     <div className="space-y-4">
@@ -32,7 +42,7 @@ export const BoardList = async () => {
               </Link>
             ))
           : "No boards"}
-        <NewBoardCard />
+        <NewBoardCard remainingBoards={orgLimit?.count || 0} />
       </div>
       {/* <Board /> */}
     </div>
