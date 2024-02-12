@@ -4,6 +4,7 @@ import {
   Command,
   Copy,
   CreditCard,
+  Github,
   HelpCircle,
   Layout,
   Loader2,
@@ -50,6 +51,7 @@ const icons = {
   user: User2,
   x: X,
   xCircle: XCircle,
+  github: Github,
 }
 
 export const Icons: IconsType = icons

@@ -18,7 +18,7 @@ export default function Home() {
         </p>
         <div className="flex gap-2">
           <Link
-            href={siteConfig.links.github}
+            href={"/sign-up"}
             target="_blank"
             className={cn(buttonVariants({ size: "default" }))}
           >
