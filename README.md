@@ -1,10 +1,8 @@
-# Fullstack Trello Clone: Next.js 14, Server Actions, React, Prisma, Stripe, Tailwind, MySQL
+# Fullstack Trello Clone: Next.js 14, Server Actions, React, Prisma, Tailwind, PostgreSQL
 
-![image](https://github-production-user-asset-6210df.s3.amazonaws.com/23248726/282673275-fd260249-82fa-4588-a67a-69bb4eb09067.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20240212%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240212T163939Z&X-Amz-Expires=300&X-Amz-Signature=397fa1390f9c8f1861bdda1409c37aac1c3c27fc66e5e4fa8d55539e68a0aa98&X-Amz-SignedHeaders=host&actor_id=84465031&key_id=0&repo_id=718156244)
+![image](https://raw.githubusercontent.com/BikrantJung/trello-clone/main/public/demo-img.png)
 
-This is a repository for Fullstack Trello Clone: Next.js 14, Server Actions, React, Prisma, Stripe, Tailwind, MySQL
-
-[VIDEO TUTORIAL](https://www.youtube.com/watch?v=pRybm9lXW2c)
+This is a repository for Fullstack Trello Clone: Next.js 14, Server Actions, React, Prisma, Tailwind, PostgreSQL
 
 Key Features:
 
@@ -20,9 +18,8 @@ Key Features:
 - Card description, rename, delete, drag & drop reorder and copy
 - Card activity log
 - Board limit for every organization
-- Stripe subscription for each organization to unlock unlimited boards
 - Landing page
-- MySQL DB
+- PostgreSQL DB
 - Prisma ORM
 - shadcnUI & TailwindCSS
 
@@ -33,13 +30,13 @@ Key Features:
 ### Cloning the repository
 
 ```shell
-git clone https://github.com/AntonioErdeljac/next13-trello.git
+git clone https://github.com/BikrantJung/trello-clone.git
 ```
 
 ### Install packages
 
 ```shell
-npm i
+pnpm i
 ```
 
 ### Setup .env file
@@ -56,33 +53,35 @@ DATABASE_URL=
 
 NEXT_PUBLIC_UNSPLASH_ACCESS_KEY=
 
-STRIPE_API_KEY=
-
 NEXT_PUBLIC_APP_URL=
 
-STRIPE_WEBHOOK_SECRET=
 ```
 
 ### Setup Prisma
 
-Add MySQL Database (I used PlanetScale)
+Add PostgreSQL Database (I used Supabase DB)
+
+The following command will push the models to database, and geneerate prisma client.
 
 ```shell
-npx prisma generate
-npx prisma db push
+pnpm db:push
 
 ```
 
 ### Start the app
 
 ```shell
-npm run dev
+pnpm dev
 ```
 
 ## Available commands
 
-Running commands with npm `npm run [command]`
+Running commands with npm `pnpm [command]`
 
-| command | description                              |
-| :------ | :--------------------------------------- |
-| `dev`   | Starts a development instance of the app |
+| command                   | description                                    |
+| :------------------------ | :--------------------------------------------- |
+| `dev`                     | Starts a development instance of the app       |
+| `db:push`                 | Synchronizes current schema.prisma to database |
+| `db:generate`             | Generates types for prisma                     |
+| `db:reset`                | Resets the database                            |
+| `ui:add [component_name]` | Installs any component from shadcn/ui library  |
