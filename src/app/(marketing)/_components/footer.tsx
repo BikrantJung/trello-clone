@@ -1,6 +1,7 @@
 import React from "react"
 import Link from "next/link"
 
+import { siteConfig } from "@/config/site"
 import { Button } from "@/components/ui/button"
 import { AppLogo } from "@/components/ui/logo"
 
@@ -11,12 +12,12 @@ export const MarketingFooter = () => {
         <AppLogo />
         <div className="flex w-full items-center justify-center space-x-4 md:block md:w-auto">
           <Button variant={"link"} asChild size="sm">
-            <Link
-              href="https://github.com/BikrantJung/trello-clone"
-              target="_blank"
-            >
+            <Link href={siteConfig.links.github} target="_blank">
               Github
             </Link>
+          </Button>
+          <Button variant={"link"} asChild size="sm">
+            <Link href="/tech-stack">Tech Stack</Link>
           </Button>
         </div>
       </div>

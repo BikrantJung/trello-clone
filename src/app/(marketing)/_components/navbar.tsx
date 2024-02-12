@@ -1,6 +1,7 @@
 import React from "react"
 import Link from "next/link"
 
+import { siteConfig } from "@/config/site"
 import { Button } from "@/components/ui/button"
 import { AppLogo } from "@/components/ui/logo"
 import { Icons } from "@/components/icons"
@@ -12,20 +13,13 @@ export const MarketingNavbar = () => {
       <div className="mx-auto flex w-full items-center justify-between md:max-w-screen-2xl">
         <AppLogo />
         <div className="flex w-full items-center justify-center space-x-4 md:w-auto">
-          <Button
-            variant={"link"}
-            asChild
-            size="sm"
-            className="border hover:bg-secondary"
-          >
-            <Link
-              href="https://github.com/BikrantJung/trello-clone"
-              target="_blank"
-            >
+          <ModeToggle />
+          <Button asChild size="sm" variant="outline">
+            <Link href={siteConfig.links.github} target="_blank">
               <Icons.github className="h-4 w-4 stroke-[1.8px]" />
             </Link>
           </Button>
-          <ModeToggle />
+
           <Button variant={"outline"} asChild size="sm">
             <Link href="/sign-in">Login</Link>
           </Button>
