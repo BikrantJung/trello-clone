@@ -1,4 +1,4 @@
-import { CardWithList, ListWithCards } from "@/prisma/types"
+import { CardWithList } from "@/prisma/types"
 import { z } from "zod"
 
 import { ActionState } from "@/lib/create-safe-action"

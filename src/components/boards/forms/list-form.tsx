@@ -19,7 +19,6 @@ export const ListForm = () => {
   const router = useRouter()
   const formRef = useRef<HTMLFormElement | null>(null)
   const inputRef = useRef<HTMLInputElement | null>(null)
-  const [title, setTitle] = useState("")
   const [isEditing, setIsEditing] = useState(false)
 
   const { fieldErrors, execute, isLoading } = useAction(createList, {

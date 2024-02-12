@@ -1,7 +1,5 @@
 "use client"
 
-import Link from "next/link"
-
 import { Button } from "@/components/ui/button"
 import { CreateBoardForm } from "@/components/boards/forms/create-board.form"
 import { Hint } from "@/components/boards/hint"

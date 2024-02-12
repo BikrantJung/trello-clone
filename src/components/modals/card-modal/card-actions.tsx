@@ -8,7 +8,6 @@ import { toast } from "sonner"
 
 import { useAction } from "@/hooks/use-action"
 import { useCardModal } from "@/hooks/use-card-modal"
-import { Button } from "@/components/ui/button"
 import { Skeleton } from "@/components/ui/skeleton"
 import { FormSubmit } from "@/components/forms/form-submit"
 import { Icons } from "@/components/icons"
@@ -21,9 +20,7 @@ interface CardActionsProps {
   cardData: CardWithList
   onAddCard: () => void
 }
-const menubarItemClassnames =
-  "flex cursor-pointer items-center justify-between py-2"
-export const CardActions = ({ cardData, onAddCard }: CardActionsProps) => {
+export const CardActions = ({ cardData }: CardActionsProps) => {
   const params = useParams()
   const { onClose } = useCardModal((state) => state)
   const { execute: executeDeleteCard, statusCode } = useAction(deleteCard, {

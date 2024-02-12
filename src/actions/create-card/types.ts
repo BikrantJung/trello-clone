@@ -1,4 +1,4 @@
-import { Card, List } from "@prisma/client"
+import { Card } from "@prisma/client"
 import { z } from "zod"
 
 import { ActionState } from "@/lib/create-safe-action"

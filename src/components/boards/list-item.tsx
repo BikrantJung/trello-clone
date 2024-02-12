@@ -1,7 +1,6 @@
 import { useRef, useState } from "react"
 import { ListWithCards } from "@/prisma/types"
 import { Draggable, Droppable } from "@hello-pangea/dnd"
-import { useOnClickOutside } from "usehooks-ts"
 
 import { cn } from "@/lib/utils"
 

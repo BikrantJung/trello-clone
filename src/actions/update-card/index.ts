@@ -1,9 +1,8 @@
 "use server"
 
 import { revalidatePath } from "next/cache"
-import { CardWithList } from "@/prisma/types"
 import { auth } from "@clerk/nextjs"
-import { Board, Card, ENTITY_TYPE } from "@prisma/client"
+import { Card, ENTITY_TYPE } from "@prisma/client"
 
 import { createAuditLog } from "@/lib/create-audit-log"
 import { createSafeAction } from "@/lib/create-safe-action"

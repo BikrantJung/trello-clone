@@ -1,6 +1,6 @@
 "use client"
 
-import { forwardRef, useEffect, useState } from "react"
+import { forwardRef } from "react"
 import { useFormStatus } from "react-dom"
 
 import { cn } from "@/lib/utils"
@@ -30,7 +30,6 @@ export const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
       id,
       type,
       className,
-      defaultValue = "",
       disabled,
       hasError,
       label,
@@ -73,7 +72,7 @@ export const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
             required={required}
             name={id}
             type={type}
-            disabled={disabled}
+            disabled={disabled || pending}
             className={cn(
               "h-7 px-2 py-1 text-sm",
               hasError && "border-destructive focus-visible:ring-0",

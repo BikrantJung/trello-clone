@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache"
 import { auth } from "@clerk/nextjs"
-import { Board, ENTITY_TYPE, List } from "@prisma/client"
+import { ENTITY_TYPE, List } from "@prisma/client"
 
 import { createAuditLog } from "@/lib/create-audit-log"
 import { createSafeAction } from "@/lib/create-safe-action"
